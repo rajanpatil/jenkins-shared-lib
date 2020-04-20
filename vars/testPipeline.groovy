@@ -1,8 +1,8 @@
 import com.shared.lib.EchoTest
 
-def echoTest = new EchoTest(this)
-
 def call() {
+
+    def echoTest = new EchoTest(this)
 
     pipeline {
         agent any
