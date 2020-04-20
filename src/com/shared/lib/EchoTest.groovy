@@ -2,13 +2,13 @@ package com.shared.lib
 
 class EchoTest implements Serializable {
 
-    def steps
+    def script
 
-    EchoTest(steps) {
-        this.steps = steps
+    EchoTest(script) {
+        this.script = script
     }
 
     def echoMessage(message) {
-        steps.echo "EchoTest: ${message}"
+        script.echo "EchoTest: ${message}"
     }
 }
