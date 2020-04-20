@@ -10,7 +10,9 @@ def call() {
         stages {
             stage('test'){
                 steps {
-                    echoTest.echoMessage "Testing pipeline..."
+                    script {
+                        echoTest.echoMessage "Testing pipeline..."
+                    }
                 }
             }
         }
