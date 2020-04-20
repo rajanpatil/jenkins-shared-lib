@@ -1,0 +1,8 @@
+*TestPipeline* is just simple custom pipeline.
+The only thing it can do - echo to console output
+
+Example:
+```
+//Jenkinsfile
+TestPipeline()
+```
