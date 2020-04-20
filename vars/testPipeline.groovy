@@ -1,3 +1,7 @@
+import com.shared.lib.EchoTest
+
+def echoTest = new EchoTest(this)
+
 def call() {
 
     pipeline {
@@ -6,7 +10,7 @@ def call() {
         stages {
             stage('test'){
                 steps {
-                    echo "Testing pipeline..."
+                    echoTest.echoMessage "Testing pipeline..."
                 }
             }
         }
