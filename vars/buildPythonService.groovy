@@ -1,10 +1,9 @@
-import com.shared.lib.ConfigManager
 import com.shared.lib.PythonServiceBuildSteps
 
 def call(Map config) {
 
     def buildSteps = new PythonServiceBuildSteps(this)
-    def configManager = new ConfigManager(config)
+    def configuration = getConfiguration(config)
 
     pipeline {
 
@@ -19,7 +18,7 @@ def call(Map config) {
             stage('Install Dependencies') {
                 steps {
                     script {
-                        Map stepsToExecute = configManager.getConfig('install')
+                        Map stepsToExecute = configuration.getConfig('install')
                         buildSteps.install(stepsToExecute.steps)
                     }
                 }
