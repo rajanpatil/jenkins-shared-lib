@@ -8,12 +8,12 @@ class PythonServiceBuildSteps implements Serializable {
         this.script = script
     }
 
-    def install() {
-        def defaultSteps = { script ->
-            script.sh 'poetry install'
-        }
+    def defaultInstallSteps = { script ->
+        script.sh 'poetry install'
+    }
 
-        install(defaultSteps)
+    def install() {
+        install(defaultInstallSteps)
     }
 
     def install(customSteps) {
