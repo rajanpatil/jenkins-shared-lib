@@ -29,7 +29,9 @@ def call(Map config) {
             stage('Check Code Style and Formatting') {
                 steps {
                     script {
-                        def codeStyleSteps = config.codeStyleSteps ?: buildSteps.defaultCheckCodeStyleSteps
+                        def codeStyleSteps = (config != null && config.codeStyleSteps != null) ?
+                                config.codeStyleSteps :
+                                buildSteps.defaultCheckCodeStyleSteps
                         buildSteps.checkCodeStyle(codeStyleSteps)
                     }
                 }
@@ -38,7 +40,9 @@ def call(Map config) {
             stage('Run Tests') {
                 steps {
                     script {
-                        def testsSteps = config.testsSteps ?: buildSteps.defaultRunTestsSteps
+                        def testsSteps = (config != null && config.testsSteps != null) ?
+                                config.testsSteps :
+                                buildSteps.defaultRunTestsSteps
                         buildSteps.runTests(testsSteps)
                     }
                 }
@@ -47,7 +51,9 @@ def call(Map config) {
             stage('Build') {
                 steps {
                     script {
-                        def buildStageSteps = config.buildSteps ?: buildSteps.defaultBuildSteps
+                        def buildStageSteps = (config != null && config.buildSteps != null) ?
+                                config.buildSteps :
+                                buildSteps.defaultBuildSteps
                         buildSteps.build(buildStageSteps)
                     }
                 }
