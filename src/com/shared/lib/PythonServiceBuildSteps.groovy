@@ -62,7 +62,7 @@ class PythonServiceBuildSteps implements Serializable {
         customSteps(script)
     }
 
-    def mergeConfig(java.util.Map serviceConfig) {
+    def mergeConfig(serviceConfig) {
         Map defaultConfig = [
                 install   : [
                         steps: this.defaultInstallSteps
