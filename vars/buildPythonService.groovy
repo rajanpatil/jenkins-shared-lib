@@ -18,8 +18,8 @@ def call(Map config) {
             stage('Install Dependencies') {
                 steps {
                     script {
-                        Map stepsToExecute = configuration.getConfig('install')
-                        buildSteps.install(stepsToExecute.steps)
+                        Map stageConfig = configuration.get('install')
+                        buildSteps.install(stageConfig.steps)
                     }
                 }
             }
@@ -27,7 +27,8 @@ def call(Map config) {
             stage('Check Code Style and Formatting') {
                 steps {
                     script {
-                        buildSteps.checkCodeStyle()
+                        Map stageConfig = configuration.get('codeStyle')
+                        buildSteps.checkCodeStyle(stageConfig.steps)
                     }
                 }
             }
@@ -35,7 +36,8 @@ def call(Map config) {
             stage('Run Tests') {
                 steps {
                     script {
-                        buildSteps.runTests()
+                        Map stageConfig = configuration.get('tests')
+                        buildSteps.runTests(stageConfig.steps)
                     }
                 }
             }
@@ -43,7 +45,8 @@ def call(Map config) {
             stage('Build') {
                 steps {
                     script {
-                        buildSteps.build()
+                        Map stageConfig = configuration.getConfig('build')
+                        buildSteps.build(stageConfig.steps)
                     }
                 }
             }
