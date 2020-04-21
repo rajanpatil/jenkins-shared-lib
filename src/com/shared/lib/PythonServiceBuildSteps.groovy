@@ -4,35 +4,60 @@ class PythonServiceBuildSteps implements Serializable {
 
     def script
 
-    PythonServiceBuildSteps(script){
+    PythonServiceBuildSteps(script) {
         this.script = script
     }
 
-    def install(){
+    def install() {
         def defaultSteps = { script ->
             script.sh 'poetry install'
         }
+
         install(defaultSteps)
     }
 
-    def install(customSteps){
+    def install(customSteps) {
         customSteps(script)
     }
 
-    def checkCodeStyle(){
-        script.sh '''
-            poetry run black --check .
-            poetry run mypy .
-            poetry run flake8
-        '''
+    def checkCodeStyle() {
+        def defaultSteps = { script ->
+            script.sh '''
+                poetry run black --check .
+                poetry run mypy .
+                poetry run flake8
+            '''
+        }
+
+        checkCodeStyle(defaultSteps)
     }
 
-    def runTests(){
-        script.sh 'poetry run pytest'
+    def checkCodeStyle(customSteps) {
+        customSteps(script)
     }
 
-    def build(){
-        script.sh 'poetry build --format=wheel'
+    def runTests() {
+        def defaultSteps = { script ->
+            script.sh 'poetry run pytest'
+        }
+
+        runTests(defaultSteps)
+    }
+
+    def runTests(customSteps) {
+        customSteps(script)
+    }
+
+    def build() {
+        def defaultSteps = { script ->
+            script.sh 'poetry build --format=wheel'
+        }
+
+        build(defaultSteps)
+    }
+
+    def build(customSteps) {
+        customSteps(script)
     }
 
 }
