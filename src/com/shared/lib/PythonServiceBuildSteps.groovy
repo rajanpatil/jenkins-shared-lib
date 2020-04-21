@@ -8,11 +8,11 @@ class PythonServiceBuildSteps implements Serializable {
         this.script = script
     }
 
-    static def defaultInstallSteps = { script ->
+    def defaultInstallSteps = { script ->
         script.sh 'poetry install'
     }
 
-    static def defaultCheckCodeStyleSteps = { script ->
+    def defaultCheckCodeStyleSteps = { script ->
         script.sh '''
                 poetry run black --check .
                 poetry run mypy .
@@ -20,11 +20,11 @@ class PythonServiceBuildSteps implements Serializable {
             '''
     }
 
-    static def defaultRunTestsSteps = { script ->
+    def defaultRunTestsSteps = { script ->
         script.sh 'poetry run pytest'
     }
 
-    static def defaultBuildSteps = { script ->
+    def defaultBuildSteps = { script ->
         script.sh 'poetry build --format=wheel'
     }
 
@@ -59,6 +59,32 @@ class PythonServiceBuildSteps implements Serializable {
 
     def build(customSteps) {
         customSteps(script)
+    }
+
+    def mergeConfig(Map serviceConfig) {
+        Map defaultConfig = [
+                install   : [
+                        steps: this.defaultInstallSteps
+                ],
+                checkStyle: [
+                        steps: this.defaultCheckCodeStyleSteps
+                ],
+                tests     : [
+                        steps: this.defaultRunTestsSteps
+                ],
+                build     : [
+                        steps: this.defaultBuildSteps
+                ]
+        ]
+
+        Map result = [:]
+        [defaultConfig, serviceConfig].each { map ->
+            map.each { key, value ->
+                result[key] = result[key] instanceof Map ? mergeConfig(result[key], value) : value
+            }
+        }
+
+        result
     }
 
 }

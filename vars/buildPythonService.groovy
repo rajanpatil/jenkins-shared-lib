@@ -3,34 +3,8 @@ import com.shared.lib.PythonServiceBuildSteps
 
 def call(Map config) {
 
-    def mergeConfig = { Map serviceConfig ->
-        Map defaultConfig = [
-                install   : [
-                        steps: PythonServiceBuildSteps.defaultInstallSteps
-                ],
-                checkStyle: [
-                        steps: PythonServiceBuildSteps.defaultCheckCodeStyleSteps
-                ],
-                tests     : [
-                        steps: PythonServiceBuildSteps.defaultRunTestsSteps
-                ],
-                build     : [
-                        steps: PythonServiceBuildSteps.defaultBuildSteps
-                ]
-        ]
-
-        Map result = [:]
-        [defaultConfig, serviceConfig].each { map ->
-            map.each { key, value ->
-                result[key] = result[key] instanceof Map ? mergeConfig(result[key], value) : value
-            }
-        }
-
-        result
-    }
-
     def buildSteps = new PythonServiceBuildSteps(this)
-    def configuration = mergeConfig(config)
+    def configuration = buildSteps.mergeConfig(config)
 
     pipeline {
 
