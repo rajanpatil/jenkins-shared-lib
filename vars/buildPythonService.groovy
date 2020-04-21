@@ -3,18 +3,18 @@ import com.shared.lib.PythonServiceBuildSteps
 
 def call(Map config) {
 
-    def mergeConfig(Map serviceConfig) {
+    def mergeConfig = { Map serviceConfig ->
         Map defaultConfig = [
-                install: [
+                install   : [
                         steps: PythonServiceBuildSteps.defaultInstallSteps
                 ],
                 checkStyle: [
                         steps: PythonServiceBuildSteps.defaultCheckCodeStyleSteps
                 ],
-                tests: [
+                tests     : [
                         steps: PythonServiceBuildSteps.defaultRunTestsSteps
                 ],
-                build: [
+                build     : [
                         steps: PythonServiceBuildSteps.defaultBuildSteps
                 ]
         ]
