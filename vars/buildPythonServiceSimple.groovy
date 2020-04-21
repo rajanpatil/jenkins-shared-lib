@@ -1,7 +1,7 @@
 import com.shared.lib.PythonServiceBuildSteps
 
 
-def call(Map config) {
+def call() {
 
     def buildSteps = new PythonServiceBuildSteps(this)
 
