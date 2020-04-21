@@ -19,7 +19,7 @@ def call(Map config) {
             stage('Install Dependencies') {
                 steps {
                     script {
-                        def stepsToExecute = configManager.getConfig('install')
+                        Map stepsToExecute = configManager.getConfig('install')
                         buildSteps.install(stepsToExecute.steps)
                     }
                 }
