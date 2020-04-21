@@ -8,11 +8,11 @@ class PythonServiceBuildSteps implements Serializable {
         this.script = script
     }
 
-    def defaultInstallSteps = { script ->
+    static def defaultInstallSteps = { script ->
         script.sh 'poetry install'
     }
 
-    def defaultCheckCodeStyleSteps = { script ->
+    static def defaultCheckCodeStyleSteps = { script ->
         script.sh '''
                 poetry run black --check .
                 poetry run mypy .
@@ -20,11 +20,11 @@ class PythonServiceBuildSteps implements Serializable {
             '''
     }
 
-    def defaultRunTestsSteps = { script ->
+    static def defaultRunTestsSteps = { script ->
         script.sh 'poetry run pytest'
     }
 
-    def defaultBuildSteps = { script ->
+    static def defaultBuildSteps = { script ->
         script.sh 'poetry build --format=wheel'
     }
 
