@@ -21,13 +21,13 @@ def call(Map config) {
             stage('custom steps'){
                 steps {
                     script {
-                        if (config.customSteps == true) {
-                            def customSteps = { script ->
+                        if (config.customEnabled == true) {
+                            /*def customSteps = { script ->
                                 script.echo "This is custom step"
                                 script.echo "Another custom step"
                                 script.sh "ls -ltr"
-                            }
-                            buildSteps.install(customSteps)
+                            }*/
+                            buildSteps.install(config.customSteps)
                         } else {
                             buildSteps.install()
                         }
