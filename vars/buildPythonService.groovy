@@ -18,7 +18,7 @@ def call(Map config) {
             stage('Install Dependencies') {
                 steps {
                     script {
-                        def installSteps =  config.install.steps ?: buildSteps.defaultInstallSteps
+                        def installSteps =  config.installSteps ?: buildSteps.defaultInstallSteps
                         buildSteps.install(installSteps)
                     }
                 }
