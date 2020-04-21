@@ -4,7 +4,6 @@ import com.shared.lib.PythonServiceBuildSteps
 def call(Map config) {
 
     def buildSteps = new PythonServiceBuildSteps(this)
-    def configuration = buildSteps.mergeConfig(config)
 
     pipeline {
 
@@ -19,7 +18,7 @@ def call(Map config) {
             stage('Install Dependencies') {
                 steps {
                     script {
-                        def installSteps = configuration.install.steps
+                        def installSteps =  config.install.steps ?: buildSteps.defaultInstallSteps
                         buildSteps.install(installSteps)
                     }
                 }
