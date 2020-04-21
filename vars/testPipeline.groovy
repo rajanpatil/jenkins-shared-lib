@@ -22,19 +22,10 @@ def call(Map config) {
                 steps {
                     script {
 
-                        def stepsToExecute = config.customEnabled == true ? config.customSteps : buildSteps.defaultInstallSteps
+                        def stepsToExecute = (config !=null && config.customSteps !=null)?
+                                config.customSteps :
+                                buildSteps.defaultInstallSteps
                         buildSteps.install(stepsToExecute)
-                        /*if (config.customEnabled == true) {
-                            *//*def customSteps = { script ->
-                                script.echo "This is custom step"
-                                script.echo "Another custom step"
-                                script.sh "ls -ltr"
-                            }*//*
-                            buildSteps.install(config.customSteps)
-                        } else {
-                            buildSteps.install()
-                        }*/
-
                     }
                 }
             }
