@@ -18,8 +18,8 @@ def call(Map config) {
             stage('Install Dependencies') {
                 steps {
                     script {
-                        Map stageConfig = configuration.get('install')
-                        buildSteps.install(stageConfig.steps)
+                        def installSteps = configuration.install.steps
+                        buildSteps.install(installSteps)
                     }
                 }
             }
