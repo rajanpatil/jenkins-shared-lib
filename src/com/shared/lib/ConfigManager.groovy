@@ -26,6 +26,7 @@ class ConfigManager {
             this.config = defaultConfig
     }
 
+    @NonCPS
     def getConfig(String stage){
         this.config.get(stage)
     }
