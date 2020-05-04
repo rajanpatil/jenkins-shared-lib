@@ -1,7 +1,5 @@
 package com.shared.lib
 
-import com.cloudbees.groovy.cps.NonCPS
-
 class ConfigManager {
     Map defaultConfig = [
             install: [
@@ -26,12 +24,10 @@ class ConfigManager {
             this.config = defaultConfig
     }
 
-    @NonCPS
     def getConfig(String stage){
         this.config.get(stage)
     }
 
-    @NonCPS
     def mergeConfig(Map defaultConfig, Map config) {
         Map result = [:]
         [defaultConfig, config].each { map ->
