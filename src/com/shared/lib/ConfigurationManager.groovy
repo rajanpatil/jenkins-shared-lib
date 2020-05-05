@@ -38,7 +38,7 @@ class ConfigurationManager implements Serializable {
     }
 
     Map getStageConfiguration(String name) {
-        config.get('stages').getAt(name)
+        config.get(name)
     }
 
     String getConfiguration(String key) {
