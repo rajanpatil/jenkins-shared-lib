@@ -5,7 +5,9 @@ def call(Map configuration) {
     ConfigurationManager config = new ConfigurationManager(configuration)
     String agentName = config.getConfiguration('agent')
     pipeline {
-        agent "${agentName}"
+        agent {
+            label "${agentName}"
+        }
 
         stages {
             stage('test-config'){

@@ -3,7 +3,7 @@ package com.shared.lib
 class ConfigurationManager implements Serializable {
 
     private Map defaultConfig = [
-            agent         : 'any',
+            agent         : 'master',
 
             configureStage: [
                     agent: 'configure-python'
