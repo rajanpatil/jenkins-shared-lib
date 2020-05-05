@@ -3,22 +3,20 @@ package com.shared.lib
 class ConfigurationManager implements Serializable {
 
     private Map defaultConfig = [
-            agent : 'python',
-            stages: [
-                    configure: [
-                            agent: 'configure-python'
-                    ],
-                    install  : [
-                            agent: 'install-python'
-                    ],
-                    codeStyle: [
-                            agent: 'code-style-python'
-                    ],
-                    test     : [
-                            agent: 'test-python'
-                    ]
-            ]
+            agent         : 'any',
 
+            configureStage: [
+                    agent: 'configure-python'
+            ],
+            installStage  : [
+                    agent: 'install-python'
+            ],
+            codeStyleStage: [
+                    agent: 'code-style-python'
+            ],
+            testStage     : [
+                    agent: 'test-python'
+            ]
     ]
 
     private Map config

@@ -5,16 +5,17 @@ def call(Map configuration) {
     ConfigurationManager config = new ConfigurationManager(configuration)
 
     pipeline {
-        agent any
+        agent config.getConfiguration('agent')
 
         stages {
             stage('test-config'){
                 steps {
                     script {
-                        def value1 = config.getConfiguration('agent')
-                        echo value1
-                        def value2 = config.getStageConfiguration('install')
-                        echo value2.get('agent')
+                        def agentName = config.getConfiguration('agent')
+                        echo agentName
+                        def installStage = config.getStageConfiguration('install')
+                        echo installStage.get('agent')
+                        echo config.getConfiguration('serviceName')
                     }
                 }
             }
