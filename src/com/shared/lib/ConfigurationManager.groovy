@@ -6,16 +6,16 @@ class ConfigurationManager implements Serializable {
             agent : 'python',
             stages: [
                     configure: [
-                            agent: 'python'
+                            agent: 'configure-python'
                     ],
                     install  : [
-                            agent: 'python'
+                            agent: 'install-python'
                     ],
                     codeStyle: [
-                            agent: 'python'
+                            agent: 'code-style-python'
                     ],
                     test     : [
-                            agent: 'python'
+                            agent: 'test-python'
                     ]
             ]
 

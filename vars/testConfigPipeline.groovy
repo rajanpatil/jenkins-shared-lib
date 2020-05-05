@@ -14,7 +14,7 @@ def call(Map configuration) {
                         def value1 = config.getConfiguration('agent')
                         echo value1
                         def value2 = config.getStageConfiguration('install')
-                        echo value2
+                        echo value2.get('agent')
                     }
                 }
             }
