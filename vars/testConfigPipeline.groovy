@@ -3,15 +3,14 @@ import com.shared.lib.ConfigurationManager
 def call(Map configuration) {
 
     ConfigurationManager config = new ConfigurationManager(configuration)
-
+    String agentName = config.getConfiguration('agent')
     pipeline {
-        agent config.getConfiguration('agent')
+        agent "${agentName}"
 
         stages {
             stage('test-config'){
                 steps {
                     script {
-                        def agentName = config.getConfiguration('agent')
                         echo agentName
                         def installStage = config.getStageConfiguration('installStage')
                         echo installStage.get('agent')
