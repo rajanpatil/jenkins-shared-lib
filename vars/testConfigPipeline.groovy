@@ -13,7 +13,7 @@ def call(Map configuration) {
                     script {
                         def agentName = config.getConfiguration('agent')
                         echo agentName
-                        def installStage = config.getStageConfiguration('install')
+                        def installStage = config.getStageConfiguration('installStage')
                         echo installStage.get('agent')
                         echo config.getConfiguration('serviceName')
                     }
