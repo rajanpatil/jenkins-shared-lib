@@ -23,6 +23,19 @@ class ConfigManager implements Serializable {
 
     private Map config
 
+    ConfigManager(Map config, script) {
+        String repoName = getRepoName(script.GIT_URL)
+
+        defaultConfig.put("repoName", repoName)
+
+        if (config == null || config.isEmpty()) {
+            this.config = defaultConfig
+        } else {
+            this.config = mergeConfig(defaultConfig, config)
+        }
+
+    }
+
     ConfigManager(Map config) {
 
         if (config == null || config.isEmpty()) {
@@ -51,5 +64,14 @@ class ConfigManager implements Serializable {
         }
 
         result
+    }
+
+    @NonCPS
+    private def getRepoName(String gitUrl) {
+        def matcher = gitUrl =~ /([^\/]+)\.git$/
+        if (matcher.find()) {
+            return matcher.group(1)
+        }
+        throw new RuntimeException("Couldn't get repo name from gitURL")
     }
 }

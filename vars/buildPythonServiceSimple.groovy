@@ -1,8 +1,10 @@
+import com.shared.lib.ConfigManager
 import com.shared.lib.PythonServiceBuildSteps
 
 
 def call() {
 
+    ConfigManager config = new ConfigManager([:], this)
     def buildSteps = new PythonServiceBuildSteps(this)
 
     pipeline {
@@ -18,7 +20,7 @@ def call() {
             stage('Install Dependencies') {
                 steps {
                     script {
-                        echo "${GIT_URL}"
+                        echo "${config.getConfiguration("repoName")}"
                         buildSteps.install()
                     }
                 }
