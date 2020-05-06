@@ -1,5 +1,7 @@
 package com.shared.lib
 
+import com.cloudbees.groovy.cps.NonCPS
+
 class ConfigurationManager implements Serializable {
 
     private Map defaultConfig = [
@@ -26,13 +28,7 @@ class ConfigurationManager implements Serializable {
         if (config == null || config.isEmpty()) {
             this.config = defaultConfig
         } else {
-            Map result = [:]
-            [defaultConfig, config].each { map ->
-                map.each { key, value ->
-                    result[key] = result[key] instanceof Map ? mergeConfig(result[key], value) : value
-                }
-            }
-            this.config = result
+            this.config = mergeConfig(defaultConfig, config)
         }
 
     }
@@ -43,5 +39,17 @@ class ConfigurationManager implements Serializable {
 
     String getConfiguration(String key) {
         config.get(key)
+    }
+
+    @NonCPS
+    private def mergeConfig(Map defaultConfig, Map config) {
+        Map result = [:]
+        [defaultConfig, config].each { map ->
+            map.each { key, value ->
+                result[key] = result[key] instanceof Map ? mergeConfig(result[key], value) : value
+            }
+        }
+
+        result
     }
 }
