@@ -24,7 +24,7 @@ class ConfigManager implements Serializable {
     private Map config
 
     ConfigManager(Map config, script) {
-        String repoName = getRepoName(script.GIT_URL)
+        String repoName = getRepoName(script.env.GIT_URL)
 
         defaultConfig.put("repoName", repoName)
 
