@@ -1,38 +1,52 @@
 package com.shared.lib
 
-class ConfigManager {
-    Map defaultConfig = [
-            install: [
-                    steps: PythonServiceBuildSteps.defaultInstallSteps
+import com.cloudbees.groovy.cps.NonCPS
+
+class ConfigManager implements Serializable {
+
+    private Map defaultConfig = [
+            agent         : 'master',
+
+            configureStage: [
+                    agent: 'configure-python'
             ],
-            checkStyle: [
-                    steps: PythonServiceBuildSteps.defaultCheckCodeStyleSteps
+            installStage  : [
+                    agent: 'install-python'
             ],
-            tests: [
-                    steps: PythonServiceBuildSteps.defaultRunTestsSteps
+            codeStyleStage: [
+                    agent: 'code-style-python'
             ],
-            build: [
-                    steps: PythonServiceBuildSteps.defaultBuildSteps
+            testStage     : [
+                    agent: 'test-python'
             ]
     ]
-    Map config
 
-    ConfigManager(Map config){
-        if (config !=null && !config.isEmpty())
-            this.config = mergeConfig(defaultConfig, config)
-        else
+    private Map config
+
+    ConfigManager(Map config) {
+
+        if (config == null || config.isEmpty()) {
             this.config = defaultConfig
+        } else {
+            this.config = mergeConfig(defaultConfig, config)
+        }
+
     }
 
-    def getConfig(String stage){
-        this.config.get(stage)
+    Map getStageConfiguration(String name) {
+        config.get(name)
     }
 
-    def mergeConfig(Map defaultConfig, Map config) {
+    String getConfiguration(String key) {
+        config.get(key)
+    }
+
+    @NonCPS
+    private def mergeConfig(Map defaultConfig, Map config) {
         Map result = [:]
         [defaultConfig, config].each { map ->
             map.each { key, value ->
-                result[key] = result[key] instanceof Map ? mergeConfig(result[key], value) : value
+                result[key] = result[key] instanceof Map ? mergeConfig(result[key] as Map, value as Map) : value
             }
         }
 

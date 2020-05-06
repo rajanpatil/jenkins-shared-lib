@@ -18,6 +18,7 @@ def call() {
             stage('Install Dependencies') {
                 steps {
                     script {
+                        echo "${GIT_URL}"
                         buildSteps.install()
                     }
                 }

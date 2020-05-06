@@ -1,8 +1,8 @@
-import com.shared.lib.ConfigurationManager
+import com.shared.lib.ConfigManager
 
 def call(Map configuration) {
 
-    ConfigurationManager config = new ConfigurationManager(configuration)
+    ConfigManager config = new ConfigManager(configuration)
     String agentName = config.getConfiguration('agent')
     pipeline {
         agent {
