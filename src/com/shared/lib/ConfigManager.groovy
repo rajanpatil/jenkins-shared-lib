@@ -72,6 +72,6 @@ class ConfigManager implements Serializable {
         if (matcher.find()) {
             return matcher.group(1)
         }
-        throw new RuntimeException("Couldn't get repo name from gitURL")
+        throw new RuntimeException("Couldn't get repo name from gitURL: "+ gitUrl)
     }
 }
