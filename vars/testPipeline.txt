@@ -1,4 +1,4 @@
-*TestPipeline* is just simple custom pipeline.
+<strong>TestPipeline</strong> is <b>just simple custom pipeline</b>.
 The only thing it can do - echo to console output
 
 Example:
