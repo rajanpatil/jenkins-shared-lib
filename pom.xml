@@ -13,7 +13,7 @@
   <description>jenkins-shared-lib</description>
 
   <properties>
-    <groovy.core.version>2.4.11</groovy.core.version>
+    <groovy.core.version>2.4.21</groovy.core.version>
     <groovy.spock.version>1.1-groovy-2.4</groovy.spock.version>
     <groovy.gmaven.pluginVersion>1.6.1</groovy.gmaven.pluginVersion>
     <surefire.pluginVersion>2.22.0</surefire.pluginVersion>
